@@ -1,7 +1,14 @@
 import 'dart:async';
 
+import 'package:hitchhike/constants/app_theme.dart';
+import 'package:hitchhike/constants/string.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import 'package:hitchhike/routes.dart';
 
 void main() {
   runApp(MyApp());
