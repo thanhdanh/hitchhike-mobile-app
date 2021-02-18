@@ -4,6 +4,7 @@ import 'package:hitchhike/constants/app_theme.dart';
 import 'package:hitchhike/constants/string.dart';
 
 import 'package:hitchhike/di/components/app_component.dart';
+import 'package:hitchhike/stores/theme/theme_store.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,14 @@ AppComponent appComponent;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(appComponent.app);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+  ]).then((_) async {
+    runApp(appComponent.app);
+  });
 }
 
 @provide
