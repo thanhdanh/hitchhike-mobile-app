@@ -35,5 +35,21 @@ class MyApp extends StatelessWidget {
   final ThemeStore _themeStore = ThemeStore(appComponent.getRepository());
 
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          Provider<ThemeStore>(create: (_) => _themeStore),
+        ],
+        child: Observer(
+          name: 'global-observer',
+          builder: (context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: Strings.appName,
+              theme: _themeStore.darkMode ? themeDataDark : themeData,
+              routes: Routes.routes,
+            );
+          },
+        ));
+  }
 }
