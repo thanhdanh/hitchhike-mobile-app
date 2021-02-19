@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:hitchhike/constants/assets.dart';
 import 'package:hitchhike/data/sharedpref/constants/preferences.dart';
 import 'package:hitchhike/routes.dart';
+import 'package:hitchhike/widgets/app_icon_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        // child: Center(child: AppIconWidget(image: Assets.appLogo)),
-        );
+      child: Center(child: AppIconWidget(image: Assets.appLogo)),
+    );
   }
 
   startTimer() {

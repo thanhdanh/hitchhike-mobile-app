@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hitchhike/ui/login/login.dart';
 import 'package:hitchhike/ui/splash/splash.dart';
 
 class Routes {
@@ -10,5 +11,6 @@ class Routes {
 
   static final routes = <String, WidgetBuilder>{
     splash: (BuildContext context) => SplashScreen(),
+    login: (BuildContext context) => LoginScreen(),
   };
 }

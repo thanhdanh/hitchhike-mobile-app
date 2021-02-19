@@ -41,6 +41,8 @@ dependencies:
   # A powerful Http client for Dart
   dio: 3.0.10
   http: ^0.12.2
+  sembast: 2.4.10
+  
   # Dependency injection
   inject:
     git:
