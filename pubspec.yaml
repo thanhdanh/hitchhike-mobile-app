@@ -1,8 +1,6 @@
 name: hitchhike
 description: A new Mobile application.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -20,26 +18,33 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.0
-  rxdart: ^0.25.0
+  rxdart: ^0.24.0
   meta: ^1.1.8
   flutter_bloc: 6.1.2
   shared_preferences: ^0.5.12+4
-  mobx: ^1.2.1+4
-  flutter_mobx: ^1.1.0+2
-  http: ^0.12.2
+  dio: ^3.0.10
+  equatable: ^1.2.6
   flutter_facebook_login: ^1.1.2
+  google_sign_in: ^4.5.4
+  graphql_flutter: ^4.0.0-beta
   flutter:
     sdk: flutter
   inject:
-    path: ./injection/inject.dart/package/inject
+    git:
+      url: https://github.com/google/inject.dart.git
+      path: package/inject
+      ref: 7c3cbf6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.8.1
-  build_runner: 1.11.1
+  build_runner: ^1.0.0
   inject_generator:
-    path: ./injection/inject.dart/package/inject_generator
+    git:
+      url: https://github.com/google/inject.dart.git
+      path: package/inject_generator
+      ref: 7c3cbf6
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"
@@ -50,7 +55,6 @@ flutter_icons:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
-
   assets:
     - assets/images/
     - assets/icons/
