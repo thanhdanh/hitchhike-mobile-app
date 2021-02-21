@@ -5,13 +5,11 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
-
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FacebookLogin _facebookSignIn = new FacebookLogin();
   final UserRepository userRepository;
 
-  AuthenticationBloc({@required this.userRepository}) : super(null)
+  AuthBloc({@required this.userRepository}) : super(null)
 
   // Facebook login
   Future<bool> signInWithFacebook() async {

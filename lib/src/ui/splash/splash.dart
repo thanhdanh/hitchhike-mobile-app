@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class MySplash extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<MySplash> {
+class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     startTimer();

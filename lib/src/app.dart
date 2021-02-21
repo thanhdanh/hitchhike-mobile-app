@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitchhike/src/constants/strings.dart';
+import 'package:hitchhike/src/routes.dart';
 
 class SimpleBlocDelegate extends BlocObserver {
   @override
@@ -28,6 +29,13 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       title: Strings.appName,
+      initialRoute: '/',
+      routes: Routes.routes,
+      builder: (context, child) {
+        return BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {},
+        );
+      },
     );
   }
 }
