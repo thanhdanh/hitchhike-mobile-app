@@ -8,22 +8,34 @@ class SharedPreferenceHelper {
   // constructor
   SharedPreferenceHelper(this._sharedPreference);
 
-  // General Methods: ----------------------------------------------------------
-  Future<String> get authToken async {
+  Future<String> get accessToken async {
     return _sharedPreference.then((preference) {
-      return preference.getString(Preferences.auth_token);
+      return preference.getString(Preferences.access_token);
     });
   }
 
-  Future<void> saveAuthToken(String authToken) async {
+  Future<void> saveAccessToken(String authToken) async {
     return _sharedPreference.then((preference) {
-      preference.setString(Preferences.auth_token, authToken);
+      preference.setString(Preferences.access_token, authToken);
     });
   }
 
-  Future<void> removeAuthToken() async {
+  Future<void> removeAccessToken() async {
     return _sharedPreference.then((preference) {
-      preference.remove(Preferences.auth_token);
+      preference.remove(Preferences.access_token);
+    });
+  }
+
+  // Login:---------------------------------------------------------------------
+  Future<bool> get isLoggedIn async {
+    return _sharedPreference.then((preference) {
+      return preference.getBool(Preferences.is_logged_in) ?? false;
+    });
+  }
+
+  Future<void> saveIsLoggedIn(bool value) async {
+    return _sharedPreference.then((preference) {
+      preference.setBool(Preferences.is_logged_in, value);
     });
   }
 }

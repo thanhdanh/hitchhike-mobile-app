@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitchhike/src/di/injectors/app_injector.dart';
+import 'package:hitchhike/src/di/modules/network_module.dart';
 import 'package:hitchhike/src/di/modules/preference_module.dart';
 import 'src/app.dart';
 
@@ -19,6 +20,6 @@ void main() async {
 
   Bloc.observer = SimpleBlocDelegate();
 
-  appInjector = await AppInjector.create(PreferenceModule());
+  appInjector = await AppInjector.create(NetworkModule(), PreferenceModule());
   runApp(appInjector.app);
 }

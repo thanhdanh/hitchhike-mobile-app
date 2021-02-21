@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hitchhike/src/constants/enums.dart';
 import 'package:meta/meta.dart';
 
-class Profile extends Equatable {
+class User extends Equatable {
   final int uid;
 
   final String fullName;
@@ -22,12 +22,12 @@ class Profile extends Equatable {
   final String nation;
   final String address;
 
-  Profile({
+  User({
     @required this.uid,
     @required this.fullName,
-    @required this.email,
-    @required this.photoUrl,
-    @required this.gender,
+    this.email,
+    this.photoUrl,
+    this.gender,
     this.phoneNumber,
     this.birthDate,
     this.address,

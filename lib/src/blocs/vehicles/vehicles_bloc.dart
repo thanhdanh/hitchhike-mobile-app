@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitchhike/src/blocs/vehicles/vehicles_event.dart';
 import 'package:hitchhike/src/blocs/vehicles/vehicles_state.dart';
+import 'package:hitchhike/src/data/repository.dart';
 import 'package:meta/meta.dart';
 
 class VehiclesBloc extends Bloc<VehiclesEvent, VehiclesState> {
-  VehiclesBloc({@required this._repository}) : super(VehiclesLoadInProgress());
+  final Repository _repository;
+  VehiclesBloc({ @required Repository repository}) : assert(_repository != null), _repository = repository;
 
   @override
   Stream<VehiclesState> mapEventToState(VehiclesEvent event) async* {

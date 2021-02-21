@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hitchhike/src/models/user/vehicle.dart';
 
 class VehiclesState extends Equatable {
   const VehiclesState();
