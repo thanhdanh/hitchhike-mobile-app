@@ -38,6 +38,7 @@ class App extends StatelessWidget {
             listener: (context, state) {},
           );
         },
+        onGenerateRoute: (_) => SplashPage.route(),
       ),
     );
   }

@@ -29,6 +29,10 @@ dependencies:
   firebase_core: "0.7.0"
   firebase_auth: "^0.20.0+1"
   cloud_firestore: "^0.16.0"
+  
+  # Add the dependency for the FlutterFire plugin for Google Analytics
+  firebase_analytics: ^5.0.2
+
   graphql: ^4.0.0-beta
   flutter:
     sdk: flutter
