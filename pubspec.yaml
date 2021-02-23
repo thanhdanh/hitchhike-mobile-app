@@ -24,27 +24,20 @@ dependencies:
   shared_preferences: ^0.5.12+4
   dio: ^3.0.10
   equatable: ^1.2.6
-  flutter_facebook_login: ^1.1.2
   google_sign_in: ^4.5.4
+  flutter_facebook_auth: "^1.0.0"
+  firebase_core: "0.7.0"
+  firebase_auth: "^0.20.0+1"
+  cloud_firestore: "^0.16.0"
   graphql: ^4.0.0-beta
   flutter:
     sdk: flutter
-  inject:
-    git:
-      url: https://github.com/google/inject.dart.git
-      path: package/inject
-      ref: 7c3cbf6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.8.1
   build_runner: ^1.0.0
-  inject_generator:
-    git:
-      url: https://github.com/google/inject.dart.git
-      path: package/inject_generator
-      ref: 7c3cbf6
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"

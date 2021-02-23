@@ -1,4 +1,4 @@
-import 'package:hitchhike/src/data/sharedpref/constants/preferences.dart';
+import 'package:hitchhike/src/data/data_providers/sharedpref/constants/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
