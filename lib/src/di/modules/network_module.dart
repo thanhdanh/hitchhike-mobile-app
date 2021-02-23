@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hitchhike/src/data/network/constants/endpoints.dart';
 import 'package:hitchhike/src/data/network/dio_client.dart';
 import 'package:hitchhike/src/data/sharedpref/constants/preferences.dart';
