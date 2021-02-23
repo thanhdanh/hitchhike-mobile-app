@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hitchhike/src/blocs/auth/auth_state.dart';
 import 'package:hitchhike/src/constants/strings.dart';
 import 'package:hitchhike/src/routes.dart';
 
@@ -34,7 +35,7 @@ class App extends StatelessWidget {
         initialRoute: '/',
         routes: Routes.routes,
         builder: (context, child) {
-          return BlocListener<AuthBloc, AuthState>(
+          return BlocListener<AuthBloc, AuthenticationState>(
             listener: (context, state) {},
           );
         },
