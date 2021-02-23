@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "978953372935",
+    "project_id": "hitchhike-aa1fc",
+    "storage_bucket": "hitchhike-aa1fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978953372935:android:d0fc9f1c215efb63f871a2",
+        "android_client_info": {
+          "package_name": "com.danhvt.hitchhike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978953372935-3nc99hkmks7hq3m8712faq1q65ip2mq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOtGjtr7u0fLYz2kPYEqDwt2MfidszCuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978953372935-3nc99hkmks7hq3m8712faq1q65ip2mq1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "978953372935-vanvjc2q5nhli4947mhi3rubcj80ulpl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.danhvt.hitchhike",
+                "app_store_id": "123456789"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
