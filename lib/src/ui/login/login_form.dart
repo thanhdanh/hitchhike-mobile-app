@@ -42,8 +42,8 @@ class __LogInFormState extends State<LogInForm> {
               );
           }
         },
-        child: Align(
-          alignment: const Alignment(0, -1 / 3),
+        child: Container(
+          // alignment: const Alignment(0, -1 / 3),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,

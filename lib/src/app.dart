@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hitchhike/src/constants/app_theme.dart';
 import 'package:hitchhike/src/constants/strings.dart';
 import 'package:hitchhike/src/data/repositories/user_repository.dart';
 import 'package:hitchhike/src/blocs/auth/bloc.dart';
@@ -42,8 +47,18 @@ class App extends StatelessWidget {
 class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness:
+          Platform.isAndroid ? Brightness.dark : Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarDividerColor: Colors.grey,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
+
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: themeData,
       title: Strings.appName,
       debugShowCheckedModeBanner: false,
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
