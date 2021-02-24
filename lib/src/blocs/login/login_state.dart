@@ -15,4 +15,28 @@ class LoginState extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  factory LoginState.empty() {
+    return LoginState(
+      isSubmitting: false,
+      isSuccess: false,
+      isFailure: false,
+    );
+  }
+
+  factory LoginState.success() {
+    return LoginState(
+      isSubmitting: false,
+      isSuccess: true,
+      isFailure: false,
+    );
+  }
+
+  factory LoginState.failure() {
+    return LoginState(
+      isSubmitting: false,
+      isSuccess: false,
+      isFailure: true,
+    );
+  }
 }

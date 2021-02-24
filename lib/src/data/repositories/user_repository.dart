@@ -44,6 +44,23 @@ class UserRepository {
     });
   }
 
+  /// Starts the Sign In with Google Flow.
+  ///
+  /// Throws a [LogInWithGoogleFailure] if an exception occurs.
+  Future<void> logInWithGoogle() async {
+    try {
+      final googleUser = await _googleSignIn.signIn();
+      final googleAuth = await googleUser.authentication;
+      final credential = firebase_auth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await _firebaseAuth.signInWithCredential(credential);
+    } on Exception {
+      throw LogInWithGoogleFailure();
+    }
+  }
+
   /// Throws a [LogOutFailure] if an exception occurs.
   Future<void> logOut() async {
     try {
