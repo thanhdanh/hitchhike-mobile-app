@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitchhike/src/blocs/auth/auth_event.dart';
 import 'package:hitchhike/src/blocs/auth/auth_state.dart';
@@ -26,6 +28,12 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapAppStartedToState() async* {
     try {
       final isSignedIn = await _userRepository.isAuthenticated();
+      if (isSignedIn) {
+        final userId = await _userRepository.getUserId();
+        yield Authenticated(userId);
+      } else {
+        yield Unauthenticated();
+      }
     } catch (_) {
       yield Unauthenticated();
     }

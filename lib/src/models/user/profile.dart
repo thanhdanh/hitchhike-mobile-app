@@ -2,13 +2,16 @@ import 'package:equatable/equatable.dart';
 import 'package:hitchhike/src/constants/enums.dart';
 import 'package:meta/meta.dart';
 
+/// {@template user}
+/// User model
+///
+/// [User.empty] represents an unauthenticated user.
+/// {@endtemplate}
 class User extends Equatable {
-  final int uid;
+  final String uid;
 
   final String fullName;
-
   final String password;
-
   final String phoneNumber;
 
   /// The current user's email address.
@@ -22,7 +25,7 @@ class User extends Equatable {
   final String nation;
   final String address;
 
-  User({
+  const User({
     @required this.uid,
     @required this.fullName,
     this.email,
@@ -51,4 +54,7 @@ class User extends Equatable {
         address,
         facebookUid
       ];
+
+  /// Empty user which represents an unauthenticated user.
+  static const empty = User(email: '', uid: '', fullName: null, photoUrl: null);
 }

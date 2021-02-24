@@ -1,28 +1,20 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  void initState() {
-    super.initState();
-    startTimer();
+class SplashScreen extends StatelessWidget {
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => SplashScreen());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: <Widget>[]),
+      body: Center(
+        child: Image.asset(
+          'assets/images/img_login.png',
+          key: const Key('splash_image'),
+          width: 150,
+        ),
+      ),
     );
   }
-
-  startTimer() {
-    var _duration = Duration(milliseconds: 2000);
-    return Timer(_duration, navigate);
-  }
-
-  navigate() async {}
 }

@@ -1,45 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hitchhike/src/blocs/auth/auth_state.dart';
 import 'package:hitchhike/src/constants/strings.dart';
-import 'package:hitchhike/src/routes.dart';
-
-class SimpleBlocDelegate extends BlocObserver {
-  @override
-  void onEvent(Bloc bloc, Object event) {
-    super.onEvent(bloc, event);
-    print(event);
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
-  }
-
-  @override
-  void onError(Cubit bloc, Object error, StackTrace stacktrace) {
-    super.onError(bloc, error, stacktrace);
-    print(error);
-  }
-}
+import 'package:hitchhike/src/data/repositories/user_repository.dart';
+import 'package:hitchhike/src/blocs/auth/bloc.dart';
+import 'package:hitchhike/src/ui/home/home.dart';
+import 'package:hitchhike/src/ui/splash/splash.dart';
 
 class App extends StatelessWidget {
+  const App({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [],
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          create: (context) {
+            return AuthenticationBloc(
+              userRepository: UserRepository(),
+            )..add(AppStarted());
+          },
+        ),
+      ],
       child: MaterialApp(
         theme: ThemeData.dark(),
         title: Strings.appName,
         initialRoute: '/',
-        routes: Routes.routes,
         builder: (context, child) {
-          return BlocListener<AuthBloc, AuthenticationState>(
-            listener: (context, state) {},
+          return BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+              if (state is Authenticated) {
+                return MultiBlocProvider(
+                  providers: [],
+                  child: HomeScreen(),
+                );
+              }
+
+              if (state is Unauthenticated) {}
+              return Center(child: CircularProgressIndicator());
+            },
           );
         },
-        onGenerateRoute: (_) => SplashPage.route(),
+        onGenerateRoute: (_) => SplashScreen.route(),
       ),
     );
   }
