@@ -28,4 +28,6 @@ class AppColors {
     800: const Color(0xff22075e),
     900: const Color(0xff120338)
   };
+
+  static const backgroundColor = const Color(0xFFFBF4EF);
 }
