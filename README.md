@@ -19,3 +19,4 @@ Reference for UI: https://dribbble.com/shots/15176409-Shipper-UI-UX-for-Web-and-
 Reference for sources: 
 + https://github.com/vince-nyanga/flutter_bloc_authentication
 + https://github.com/hoc081098/node-auth-flutter-BLoC-pattern-RxDart
++ https://github.com/thyagoluciano/flutter_bloc_firebase_login

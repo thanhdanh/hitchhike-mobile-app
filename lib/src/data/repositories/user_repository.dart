@@ -59,7 +59,13 @@ class UserRepository {
       );
       final firebase_auth.UserCredential authResult =
           await _firebaseAuth.signInWithCredential(credential);
+
       final firebase_auth.User user = authResult.user;
+      assert(user.email != null);
+      assert(user.displayName != null);
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+      if (user != null) {}
     } on Exception {
       throw LogInWithGoogleFailure();
     }
