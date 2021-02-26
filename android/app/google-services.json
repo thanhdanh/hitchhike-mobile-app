@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "978953372935-75un1vtpir3h4v0a7io2q5joik6mcgs0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.danhvt.hitchhike",
+            "certificate_hash": "143353c1984c37a1ee5cb5efbe11803f5acd08c5"
+          }
+        },
+        {
           "client_id": "978953372935-3nc99hkmks7hq3m8712faq1q65ip2mq1.apps.googleusercontent.com",
           "client_type": 3
         }

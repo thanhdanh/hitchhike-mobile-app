@@ -22,7 +22,7 @@ class UserRepository {
     GoogleSignIn googleSignIn,
     FacebookAuth facebookSignIn,
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
+        _googleSignIn = googleSignIn ?? GoogleSignIn(),
         _facebookSignIn = facebookSignIn ?? FacebookAuth.instance;
 
   Future<bool> isAuthenticated() async {
@@ -49,13 +49,17 @@ class UserRepository {
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      final googleUser = await _googleSignIn.signIn();
-      final googleAuth = await googleUser.authentication;
-      final credential = firebase_auth.GoogleAuthProvider.credential(
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final firebase_auth.AuthCredential credential =
+          firebase_auth.GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await _firebaseAuth.signInWithCredential(credential);
+      final firebase_auth.UserCredential authResult =
+          await _firebaseAuth.signInWithCredential(credential);
+      final firebase_auth.User user = authResult.user;
     } on Exception {
       throw LogInWithGoogleFailure();
     }

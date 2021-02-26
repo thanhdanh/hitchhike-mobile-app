@@ -32,7 +32,7 @@ dependencies:
   
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^5.0.2
-
+  font_awesome_flutter: ^8.4.0
   graphql: ^4.0.0-beta
   flutter:
     sdk: flutter
