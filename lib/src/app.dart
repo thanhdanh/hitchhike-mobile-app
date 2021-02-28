@@ -6,47 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitchhike/src/constants/app_theme.dart';
 import 'package:hitchhike/src/constants/strings.dart';
-import 'package:hitchhike/src/data/repositories/user_repository.dart';
 import 'package:hitchhike/src/blocs/auth/bloc.dart';
+import 'package:hitchhike/src/router.dart';
 import 'package:hitchhike/src/ui/home/home.dart';
 import 'package:hitchhike/src/ui/login/login.dart';
 import 'package:hitchhike/src/ui/splash/splash.dart';
 
-class App extends StatelessWidget {
-  const App({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider<UserRepository>(
-            create: (context) {
-              return UserRepository();
-            },
-          ),
-          // RepositoryProvider<HitchhikeRepository>(
-          //   create: (context) {
-          //     return HitchhikeRepository();
-          //   },
-          // ),
-        ],
-        child: BlocProvider<AuthenticationBloc>(
-          create: (context) {
-            final userRepository =
-                RepositoryProvider.of<UserRepository>(context);
-            return AuthenticationBloc(userRepository: userRepository)
-              ..add(AppStarted());
-          },
-          child: AppView(),
-        ));
-  }
-}
-
-class AppView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+class MyApp extends StatelessWidget {
+  static void initSystemDefault() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarBrightness:
@@ -56,26 +23,29 @@ class AppView extends StatelessWidget {
       systemNavigationBarDividerColor: Colors.grey,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       theme: themeData,
       title: Strings.appName,
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter.generateRoute,
+      // initialRoute: AppRouter.SPLASH,
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is Uninitialized) {
             return SplashScreen();
-          }
-
-          if (state is Authenticated) {
+          } else if (state is AuthenticationAuthenticated) {
             return HomeScreen();
-          }
-
-          if (state is Unauthenticated) {
+          } else if (state is AuthenticationNotAuthenticated) {
             return LoginScreen();
           }
 
-          return Center(child: CircularProgressIndicator());
+          return Container(
+            child: Center(child: Text('Unhandle State $state')),
+          );
         },
       ),
     );

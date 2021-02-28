@@ -12,7 +12,7 @@ class AuthenticationBloc
     @required userRepository,
   })  : assert(userRepository != null),
         _userRepository = userRepository,
-        super(Uninitialized());
+        super(AuthenticationInitial());
 
   final UserRepository _userRepository;
 
@@ -23,19 +23,33 @@ class AuthenticationBloc
     if (event is AppStarted) {
       yield* _mapAppStartedToState();
     }
+
+    if (event is UserLoggedIn) {
+      yield* _mapUserLoggedInToState(event);
+    }
   }
 
   Stream<AuthenticationState> _mapAppStartedToState() async* {
+    yield AuthenticationLoading();
+
     try {
+      await Future.delayed(Duration(milliseconds: 500)); // a simulated delay
       final isSignedIn = await _userRepository.isAuthenticated();
+
       if (isSignedIn) {
-        final userId = await _userRepository.getUserId();
-        yield Authenticated(userId);
+        final currentUser = _userRepository.getUser();
+        yield AuthenticationAuthenticated(user: currentUser);
       } else {
-        yield Unauthenticated();
+        yield AuthenticationNotAuthenticated();
       }
-    } catch (_) {
-      yield Unauthenticated();
+    } catch (e) {
+      yield AuthenticationFailure(
+          message: e.message ?? 'An unknown error occurred');
     }
+  }
+
+  Stream<AuthenticationState> _mapUserLoggedInToState(
+      UserLoggedIn event) async* {
+    yield AuthenticationAuthenticated(user: event.user);
   }
 }

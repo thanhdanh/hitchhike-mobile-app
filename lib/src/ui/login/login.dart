@@ -9,14 +9,18 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userRepository = RepositoryProvider.of<UserRepository>(context);
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      // appBar: AppBar(title: const Text('Đăng nhập')),
-      body: SafeArea(
-        minimum: const EdgeInsets.all(16),
-        child: BlocProvider<LoginBloc>(
-          create: (context) => LoginBloc(userRepository: userRepository),
-          child: LogInForm(),
+      appBar: AppBar(title: const Text('Đăng nhập')),
+      body: BlocProvider(
+        create: (context) => LoginBloc(userRepository: userRepository),
+        child: SafeArea(
+          minimum: const EdgeInsets.all(16),
+          child: BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(userRepository: userRepository),
+            child: LogInForm(),
+          ),
         ),
       ),
     );

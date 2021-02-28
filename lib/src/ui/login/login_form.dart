@@ -14,40 +14,51 @@ class LogInForm extends StatefulWidget {
 }
 
 class __LogInFormState extends State<LogInForm> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  LoginBloc _loginBloc;
+
+  @override
+  void initState() {
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if (state.isFailure) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text('Login Failure'), Icon(Icons.error)],
-                  ),
-                  backgroundColor: Colors.red,
+      listener: (context, state) {
+        if (state.isFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [Text('Login Failure'), Icon(Icons.error)],
                 ),
-              );
-          }
-          if (state.isSubmitting) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Logging In...'),
-                      CircularProgressIndicator(),
-                    ],
-                  ),
+                backgroundColor: Colors.red,
+              ),
+            );
+        }
+        if (state.isSubmitting) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Logging In...'),
+                    CircularProgressIndicator(),
+                  ],
                 ),
-              );
-          }
-        },
-        child: Container(
+              ),
+            );
+        }
+      },
+      child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+        return Container(
           color: AppColors.backgroundColor,
           child: SingleChildScrollView(
             child: Padding(
@@ -66,12 +77,14 @@ class __LogInFormState extends State<LogInForm> {
                   LineHorizontalWithTextWidget(
                     text: 'Hoặc',
                   ),
-                  _GoogleLoginButton(),
+                  _buildGoogleBtn(),
                 ],
               ),
             ), //
           ),
-        ));
+        );
+      }),
+    );
   }
 
   Widget _buildTopBrand() {
@@ -134,13 +147,8 @@ class __LogInFormState extends State<LogInForm> {
       },
     );
   }
-}
 
-class _GoogleLoginButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final LoginBloc _loginBloc = BlocProvider.of<LoginBloc>(context);
-
+  Widget _buildGoogleBtn() {
     return RaisedButton.icon(
       key: const Key('loginForm_googleLogin_raisedButton'),
       label: const Text(

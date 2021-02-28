@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hitchhike/src/models/user/profile.dart';
 
@@ -15,23 +15,19 @@ class LogOutFailure implements Exception {}
 class UserRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final FacebookAuth _facebookSignIn;
+  // final FacebookAuth _facebookSignIn;
 
   UserRepository({
     firebase_auth.FirebaseAuth firebaseAuth,
     GoogleSignIn googleSignIn,
-    FacebookAuth facebookSignIn,
+    // FacebookAuth facebookSignIn,
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn(),
-        _facebookSignIn = facebookSignIn ?? FacebookAuth.instance;
+        _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
+  // _facebookSignIn = facebookSignIn ?? FacebookAuth.instance;
 
   Future<bool> isAuthenticated() async {
     final currentUser = _firebaseAuth.currentUser;
     return currentUser != null;
-  }
-
-  Future<void> authenticate() {
-    return _firebaseAuth.signInAnonymously();
   }
 
   Future<String> getUserId() async {
@@ -47,8 +43,9 @@ class UserRepository {
   /// Starts the Sign In with Google Flow.
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
-  Future<void> logInWithGoogle() async {
+  Future<User> logInWithGoogle() async {
     try {
+      await Firebase.initializeApp();
       final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
@@ -57,18 +54,17 @@ class UserRepository {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      final firebase_auth.UserCredential authResult =
-          await _firebaseAuth.signInWithCredential(credential);
 
-      final firebase_auth.User user = authResult.user;
-      assert(user.email != null);
-      assert(user.displayName != null);
-      assert(!user.isAnonymous);
-      assert(await user.getIdToken() != null);
-      if (user != null) {}
-    } on Exception {
+      await _firebaseAuth.signInWithCredential(credential);
+      return _firebaseAuth.currentUser?.toUser;
+    } catch (e) {
+      print(e);
       throw LogInWithGoogleFailure();
     }
+  }
+
+  User getUser() {
+    return _firebaseAuth.currentUser.toUser;
   }
 
   /// Throws a [LogOutFailure] if an exception occurs.
@@ -77,7 +73,7 @@ class UserRepository {
       await Future.wait([
         _firebaseAuth.signOut(),
         _googleSignIn.signOut(),
-        _facebookSignIn.logOut(),
+        // _facebookSignIn.logOut(),
       ]);
     } on Exception {
       throw LogOutFailure();
