@@ -9,6 +9,6 @@ final ThemeData themeData = new ThemeData(
 
 final ThemeData themeDataDark = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: AppColors.orange[500],
+  primaryColor: AppColors.purple[500],
   backgroundColor: AppColors.backgroundColor,
 );

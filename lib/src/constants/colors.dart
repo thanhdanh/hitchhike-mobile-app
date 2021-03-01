@@ -29,7 +29,8 @@ class AppColors {
     900: const Color(0xff120338)
   };
 
-  static Color backgroundColor = const Color(0xFFFBF4EF);
+  static const Color backgroundColor = const Color(0xFFFBF4EF);
   static Color primaryColor = purple[500];
   static Color accentColor = orange[500];
+  static const Color initial = Color.fromRGBO(23, 43, 77, 1.0);
 }
